@@ -1,4 +1,4 @@
-module module-2
+module httpServer
 
 go 1.18
 

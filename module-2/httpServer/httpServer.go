@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"github.com/golang/glog"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -22,7 +23,7 @@ func main() {
 }
 
 func healthz(w http.ResponseWriter, r *http.Request) {
-	_, _ = w.Write([]byte("ok"))
+	io.WriteString(w, "ok")
 	w.WriteHeader(http.StatusOK)
 }
 

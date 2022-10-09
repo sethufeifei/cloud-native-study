@@ -1,0 +1,16 @@
+FROM golang:1.18-alpine AS build
+
+RUN mkdir -p /httpServer
+WORKDIR /httpServer
+COPY . /httpServer
+
+ENV GO111MODULE=on
+RUN go mod download
+RUN go build httpServer.go
+
+
+FROM alpine
+MAINTAINER hufeifei
+COPY --from=build /httpServer/httpServer /httpServer/httpServer
+ENTRYPOINT ["/httpServer/httpServer"]
+EXPOSE 80
